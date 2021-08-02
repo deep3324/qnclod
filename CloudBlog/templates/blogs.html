@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Quotes and Cloud | Blogs</title>
+<style>
+  #container a {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+  }
+
+  #container a.learn-more {
+    width: 17rem;
+    height: auto;
+  }
+
+  #container a.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #021577;
+    border-radius: 1.625rem;
+  }
+
+  #container a.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+  }
+
+  #container a.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+  }
+
+  #container a.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.25rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+  }
+
+  #container a.learn-more .button-text-con {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0.25rem;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 2rem;
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  #container a:hover .circle {
+    width: 100%;
+  }
+
+  #container a:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+  }
+
+  #container a:hover .button-text-con {
+    color: #fff;
+  }
+</style>
+{% endblock head %}
+
+{% block body %}
+<div class="container my-5">
+  {% for i in page_obj %}
+  <div class="row d-flex justify-content-center">
+    <div class="card blogcard mx-1 my-2" style="width: 50rem;">
+      <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h3 class="card-title"> <a href="" class="blog-title text-dark font-weight-bolder">{{i.title}}</a></h3>
+        <i class="fa fa-user"> <a href="" class="blog-writer">{{i.user}} </a> &nbsp&nbsp&nbsp||&nbsp&nbsp&nbsp</i>
+        <i class="fa fa-calendar"> <a class="blog-writer">{{i.date}}</a> &nbsp&nbsp&nbsp</i>
+        {% comment %} <i class="fa fa-comment"> <a class="blog-writer">{{comments.count}} comments</a></i> {% endcomment %}
+        <div>
+        <p class="card-text">{{i.content|safe|slice:":100"}}</p>
+        {% for tag in i.tags.all %}
+    <!-- <span class="badge badge-primary">{{tag}}</span> -->
+    <a href="/tagged_post/{{tag.id}}" class="badge badge-secondary btn-sm">{{tag}}</a>
+    {% endfor%}
+      </div>
+      <div class="subm my-2" id="container">
+        <a href="/blogs/{{i.slug}}" class="learn-more">
+          <span class="circle" aria-hidden="true">
+            <span class="icon arrow"></span>
+          </span>
+          <span class="button-text-con">Continue Reading</span>
+        </a>
+      </div>
+    </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="pagination justify-content-center">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-chevron-left"></i></a>
+    {% endif %}
+
+    <span class="current" style="border: 1px solid grey; padding: 3px 10px; border-radius: 15px; margin: 0px 5px;">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-chevron-right"></i></a>
+    {% endif %}
+  </span>
+</div>
+
+{% endblock body %}

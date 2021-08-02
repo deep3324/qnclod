@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Start You Cloud Journey | Quotes and Cloud">
+    <meta name="description"
+        content="Cloud Platforms are booming and business are setting their data centers on Cloud. Start your Journey with Navneet Bhardwaj from requirement to Migration on Cloud." />
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+    <link rel="canonical" href="https://quotesandcloud.in/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Start You Cloud Journey | Quotes and Cloud">
+    <meta property="og:description"
+        content="Cloud Platforms are booming and business are setting their data centers on Cloud. Start your Journey with Navneet Bhardwaj from requirement to Migration on Cloud.">
+    <meta property="og:url" content="https://quotesandcloud.in/">
+    <meta property="og:site_name" content="Quotes and Cloud">
+    <meta property="og:image" content="{% static '/static/images/web-image.png' %}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://quotesandcloud.in/">
+    <meta property="twitter:title" content="Start You Cloud Journey | Quotes and Cloud">
+    <meta property="twitter:description"
+        content="Cloud Platforms are booming and business are setting their data centers on Cloud. Start your Journey with Navneet Bhardwaj from requirement to Migration on Cloud.">
+    <meta property="twitter:image" content="{% static '/static/images/web-image.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+
+    {% comment %} favicon {% endcomment %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/favico/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favico/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favico/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static '/favico/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static '/favico/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    {% comment %} fontawesomekits {% endcomment %}
+
+    <link rel="stylesheet" href="{% static '/fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static '/fontawesome/js/all.js' %}">
+    <link rel="stylesheet" href="{% static '/fontawesome/less/fontawesome.less' %}">
+    <link rel="stylesheet" href="{% static '/fontawesome/scss/fontawesome.scss' %}">
+    <link rel="stylesheet" href="{% static '/fontawesome/sprites/solid.svg' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
+    <style type="text/css">
+        a {
+            text-decoration: none !important;
+        }
+
+        #loading {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: #fff url('../static/images/loader.gif') no-repeat center center;
+            z-index: 99999;
+        }
+
+        #loading-image {
+            position: absolute;
+            top: 100px;
+            left: 240px;
+            z-index: 100;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('#loading').hide();
+        });
+    </script>
+    {% block head %}
+    {% endblock head %}
+    <title>QuotesandCloud</title>
+</head>
+
+<body onload="myFunction()">
+    <div id="loading"></div>
+    <nav class="navbar nav-cloud navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">QuotesandCloud</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav mx-5">
+                    <li class="nav-item {{ blogs_page }}">
+                        <a class="nav-link" href="/blogs">Blog</a>
+                    </li>
+                    <li class="nav-item {{ about_page }}">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item {{ contact_page }}">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+
+
+            </form>
+            <form class="form-inline" action="/search" method="get">{% csrf_token %}
+                <input class="form-control mr-sm-2" id="searchTxt" type="search" placeholder="Search"
+                    aria-label="Search" name="search">
+                <button class="btn btn-search btn-outline-dark my-2 mx-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div>
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+    {% block body %}
+    {% endblock body %}
+
+    <!--footer-->
+    <hr>
+    <footer class="container footer-cloud py-3">
+        <div class="row">
+            <div class="col-6 col-md">
+                <h5>Tags</h5>
+                <ul class="list-unstyled text-small">
+                    {% for i in blog %}
+                    {% for tag in i.tags.all %}
+                    <li><a class="text-muted" href="/tagged_post/{{tag.id}}">{{tag}}</a></li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Follow me on</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" target="__blank"
+                            href="https://www.facebook.com/navneet.bhardwaj.520/">Facebook</a></li>
+                    <li><a class="text-muted" target="__blank"
+                            href="https://www.linkedin.com/in/navneet-bhardwaj745/">LinkedIn</a></li>
+                    <li><a class="text-muted" target="__blank"
+                            href="https://www.instagram.com/n_a_v_n_e_e___t/">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Recent Posts</h5>
+                <ul class="list-unstyled text-small">
+                    {% for i in blog|slice:":3" %}
+                    <div class="mb-3" style="max-width: 520px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="/media/{{i.image}}" class="img-fluid" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <a href="/blogs/{{i.slug}}" class="card-title">{{i.title}}</a>
+                                    <p class="card-text"><small class="text-muted">{{i.date}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted " href="/cookie">Cookie Policy</a></li>
+                    <li><a class="text-muted " href="/disclaimer">Disclaimer</a></li>
+                    <li><a class="text-muted " href="/privacy">Privacy</a></li>
+                    <li><a class="text-muted " href="/termandconditions">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- START Bootstrap-Cookie-Alert -->
+    <div class="alert text-center cookiealert" role="alert">
+        <b>We use cookies to ensure that we give you the best experience on our website. If you continue to use this
+            site we will assume that you are happy with it.</b>
+        <button type="button" class="btn btn-primary btn-sm acceptcookies">
+            I agree
+        </button>
+        <a type="button" href="/privacy" class="btn btn-primary btn-sm">
+            Privacy Policy
+        </a>
+    </div>
+
+    <script>
+        var preloader = document.getElementById("loading");
+        function myFunction() {
+            preloader.style.display = 'none';
+        };
+    </script>
+    <!-- END Bootstrap-Cookie-Alert -->
+    <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+    <script src="{% static '/bootstrap/js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static '/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/bootstrap/js/bootstrap.bundle.js' %}"></script>
+
+</body>
+
+</html>

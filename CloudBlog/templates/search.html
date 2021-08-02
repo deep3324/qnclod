@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Quotes and Cloud | Search Result</title>
+<style>
+    @media(max-width: 550px) {
+        .home-img-top {
+            display: none;
+        }
+    }
+
+    @import url("https://fonts.googleapis.com/css?family=Mukta:700");
+
+    * {
+        box-sizing: border-box;
+    }
+
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    button {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        border: 0;
+        vertical-align: middle;
+        text-decoration: none;
+        background: transparent;
+        padding: 0;
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    button.learn-more {
+        width: 12rem;
+        height: auto;
+    }
+
+    button.learn-more .circle {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: relative;
+        display: block;
+        margin: 0;
+        width: 3rem;
+        height: 3rem;
+        background: #021577;
+        border-radius: 1.625rem;
+    }
+
+    button.learn-more .circle .icon {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: #fff;
+    }
+
+    button.learn-more .circle .icon.arrow {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        left: 0.625rem;
+        width: 1.125rem;
+        height: 0.125rem;
+        background: none;
+    }
+
+    button.learn-more .circle .icon.arrow::before {
+        position: absolute;
+        content: "";
+        top: -0.25rem;
+        right: 0.0625rem;
+        width: 0.625rem;
+        height: 0.625rem;
+        border-top: 0.125rem solid #fff;
+        border-right: 0.125rem solid #fff;
+        transform: rotate(45deg);
+    }
+
+    button.learn-more .button-text {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.75rem 0;
+        margin: 0 0 0 1.85rem;
+        color: #fff;
+        font-weight: 700;
+        line-height: 1.6;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    button:hover .circle {
+        width: 100%;
+    }
+
+    button:hover .circle .icon.arrow {
+        background: #fff;
+        transform: translate(1rem, 0);
+    }
+
+    button:hover .button-text {
+        color: #fff;
+    }
+
+
+    .subm a {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        outline: none;
+        border: 0;
+        vertical-align: middle;
+        text-decoration: none;
+        background: transparent;
+        padding: 0;
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    .subm a.learn-more {
+        width: 17rem;
+        height: auto;
+    }
+
+    .subm a.learn-more .circle {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: relative;
+        display: block;
+        margin: 0;
+        width: 3rem;
+        height: 3rem;
+        background: #021577;
+        border-radius: 1.625rem;
+    }
+
+    .subm a.learn-more .circle .icon {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: #fff;
+    }
+
+    .subm a.learn-more .circle .icon.arrow {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        left: 0.625rem;
+        width: 1.125rem;
+        height: 0.125rem;
+        background: none;
+    }
+
+    .subm a.learn-more .circle .icon.arrow::before {
+        position: absolute;
+        content: "";
+        top: -0.25rem;
+        right: 0.0625rem;
+        width: 0.625rem;
+        height: 0.625rem;
+        border-top: 0.125rem solid #fff;
+        border-right: 0.125rem solid #fff;
+        transform: rotate(45deg);
+    }
+
+    .subm a.learn-more .button-text {
+        transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+        position: absolute;
+        top: 0;
+        left: 0.25rem;
+        right: 0;
+        bottom: 0;
+        padding: 0.75rem 0;
+        margin: 0 0 0 2rem;
+        color: #fff;
+        font-weight: 700;
+        line-height: 1.6;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .subm a:hover .circle {
+        width: 100%;
+    }
+
+    .subm a:hover .circle .icon.arrow {
+        background: #fff;
+        transform: translate(1rem, 0);
+    }
+
+    .subm a:hover .button-text {
+        color: #fff;
+    }
+</style>
+
+{% endblock head %}
+
+{% block body %}
+
+
+{% if post %}
+<h1 class="text-center py-5">Result found</h1>
+<div class="container my-5">
+    <div class="row mx-0">
+        {% for i in post|slice:":6" %}
+        <div class="card blogcard mx-1 my-1" style="width: 20rem;">
+            <img src="/media/{{i.image}}" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title">{{i.title}}</h5>
+                <div class="user">
+                    <i class="fa fa-user"> <a href="">{{i.user}}</a></i> || {{i.date}}
+                </div>
+                <div>
+                <p class="card-text">{{i.content|safe|slice:"0:100"}}</p>
+                {% for tag in i.tags.all %}
+                <span class="badge badge-primary my-2">{{tag}}</span>
+                {% endfor%}
+                </div>
+                <div class="subm" id="container">
+                    <a href="/blogs/{{i.slug}}" class="learn-more">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <span class="button-text">Continue Reading</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<h2 class="text-center py-5">Result not found</h2>
+{% endif %}
+
+
+{% endblock body %}

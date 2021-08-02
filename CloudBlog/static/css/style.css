@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.nav-cloud{
+    background-color:  #e6eaff  !important;
+}
+.nav-cloud .navbar-brand {
+    color: #000000 !important;
+    font-size: 1.55rem;
+}
+.nav-cloud .navbar-brand:hover {
+    color: #021577 !important;
+}
+.nav-cloud .search {
+    color: #021577 !important;
+}
+.nav-cloud .btn-search {
+    color: #021577 !important;
+    border: #021577 1px solid;
+}
+.nav-cloud .btn-search:hover {
+    background-color: #021577 !important;
+    color: white !important;
+}

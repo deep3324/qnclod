@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Quotes and Cloud | Contact</title>
+<style>
+    .contact-form input {
+        border-radius: 20px !important;
+    }
+    .contact-form textarea {
+        border-radius: 20px !important;
+    }
+    
+    #btn-cont {
+    color: #021577 !important;
+    border: #021577 1px solid;
+    background: transparent;
+  }
+
+  #btn-cont:hover {
+    background-color: #021577 !important;
+    color: white !important;
+  }
+</style>
+{% endblock head %}
+{% block body %}
+<div class="position-relative overflow-hidden">
+    <div class="col-md-5 p-lg-5 mx-auto text-center  my-5">
+        <h1 class="display-4 font-weight-normal">Leave A Note</h1>
+        <p class="lead font-weight-normal">I’m Coffee nerd with Cloud Computing discussions, feel free to get in touch
+            with me.</p>
+    </div>
+</div>
+<div class="bg-light">
+    <div class="container position-relative overflow-hidden">
+        <div class="p-lg-5 mx-auto">
+            <h1 class="display-4 font-weight-bold">Contact Info</h1>
+            <p class="lead font-weight-normal">Planning to start your cloud career?</p>
+            <p class="lead font-weight-normal">Confused on how to start Cloud Journey?</p>
+            <p class="lead font-weight-normal">Preparing for Cloud Certification and need some last moment tips?</p>
+            <p class="lead font-weight-normal">or Anything you feel where we can work together!!!</p>
+            <p class="lead font-weight-normal">Feel free to reach out to me with your queries, doubts, suggestions,
+                proposals or any idea, I am a human being who like to interact with other for learning and sharing my
+                experiences.</p>
+            <p class="lead font-weight-normal">Simply fill out the contact form and I will get back to you or if you are
+                in Kolkata, Feel free to offer me Coffee…</p>
+        </div>
+        <div class="container contact-form position-relative overflow-hidden ">
+            <div class="container">
+                <form class="py-4" action="/contact" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <label for="contactname">Your Name</label>
+                        <input type="name" class="form-control" id="contactname" name="name" placeholder="Enter Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactemail">Your Email</label>
+                        <input type="email" class="form-control" id="contactemail" name="email" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactsubject">Subject</label>
+                        <input type="text" class="form-control" id="contactsubject" name="subject" placeholder="Enter your Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactmsg">Your Message</label>
+                        <textarea class="form-control" id="contactmsg" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" id="btn-cont" class="btn btn-sm btn-lg btn-outline-info px-3">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

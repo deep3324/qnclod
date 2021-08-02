@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<title>Quotes and Cloud | About</title>
+<style>
+    #img-abt {
+        height: 150px;
+    }
+</style>
+{% endblock head %}
+{% block body %}
+<div class="position-relative overflow-hidden">
+    <div class="col-md-7 p-lg-4 mx-auto my-4">
+        <h1 class="display-4 font-weight-normal text-center py-2">My Journey</h1>
+        <p class="lead font-weight-normal text-md-left">Hey There!!</p>
+        <p class="lead font-weight-normal text-md-left">My name is Navneet Bhardwaj. A final year undergrad currently located in Kolkata.</p>
+        <p class="lead font-weight-normal text-md-left">I started my Cloud Journey Exploring Microsoft Azure and i'm still learning about it. I am a person who believes in Leaning by Experimenting.</p>
+        <p class="lead font-weight-normal text-md-left">I love interacting with people on Various Cloud Topics which helps me understand the concepts in a more better manner.</p>
+        <p class="lead font-weight-normal text-md-left">I believe in the line “BASICS ARE EVERYTHING”. So lets try to unveil the secrets of Cloud in the Most simplest Manner.</p>
+        <p class="lead font-weight-normal text-md-left mb-4 mb-5">Till then <strong>KEEP CALM AND CLOUD !</strong></p>
+            <hr class="my-1">
+        <h1 class="display-4 font-weight-normal text-center">My Cloud Certifications... </h1><br>
+    </div>
+</div>
+<div class="container d-flex justify-content-center">
+    <div class="position-relative overflow-hidden mb-5 my-1 ">
+        {% for i in abt %}
+        <img id="img-abt" src="/media/{{i.icon}}" alt="{{i.name}}" class="img-fluid mx-2">
+        {% endfor %}
+    </div>
+</div>
+<h3 class="display-5 font-weight-normal text-center"> More are coming Soon!!! </h3>
+{% endblock body %}
